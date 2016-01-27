@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.utComm.ut.dao.PersonDao">
+
+	<sql id="Base_Column_List" >
+		id,`age`,`name`,sex
+	</sql>
+
+
+	<select id="queryAllPerson" resultType="com.utComm.ut.entity.Person">
+        SELECT
+		<include refid="Base_Column_List" />
+		from T_B_PERSON
+    </select>
+    
+    <insert id="savePerson" parameterType="com.utComm.ut.entity.Person" useGeneratedKeys="true" keyProperty="id">
+		insert into T_B_PERSON
+		(name,
+		age,
+		sex)
+		values
+		(#{name},
+		#{age},
+		#{sex})
+	</insert>
+
+	<insert id="insertPerson" parameterType="com.utComm.ut.entity.Person" useGeneratedKeys="true" keyProperty="id">
+		insert into T_B_PERSON
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			name,
+			age,
+			sex
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{name},
+			#{age},
+			#{sex}
+		</trim>
+	</insert>
+
+
+	<!--1.如果传入的是单参数且参数类型是一个List的时候，collection属性值为list
+	2.如果传入的是单参数且参数类型是一个array数组的时候，collection的属性值为array
+	3.如果传入的参数是多个的时候，我们就需要把它们封装成一个Map了，当然单参数也可以封装成map-->
+	<insert id="batchInsertPerson" parameterType="com.utComm.ut.entity.Person" useGeneratedKeys="true" keyProperty="id">
+
+		<selectKey resultType="long" keyProperty="id" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+
+		insert into T_B_PERSON
+		<trim prefix="(" suffix=")">
+			name,
+			age,
+			sex
+		</trim>
+		VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.name},
+			#{item.age},
+			#{item.sex}
+			)
+		</foreach>
+	</insert>
+
+
+
+
+</mapper>
