@@ -1,7 +1,7 @@
 package com.utComm;
 
 import com.utComm.ut.dao.PersonDao;
-import com.utComm.ut.entity.Person;
+import com.utPro.entity.Person;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

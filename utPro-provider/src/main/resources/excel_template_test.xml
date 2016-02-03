@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sheets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="excel_template-1.0.xsd">
+
+    <sheet name="exportPerson">
+        <block start="A2" end="G2" dataName="personList" loop="true" loopClass="com.utPro.entity.Person">
+            <cell position="A2" dataName="name" />
+            <cell position="B2" dataName="age" />
+            <cell position="C2" dataName="sex" />
+        </block>
+    </sheet>
+
+</sheets>

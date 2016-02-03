@@ -30,5 +30,9 @@
             </property>
         </bean>
 
+        <bean id="excelManipulatorFactory" class="com.utComm.utils.ExcelManipulatorFactory">
+
+        </bean>
+
         <import resource="repository.xml"/>
 </beans>
